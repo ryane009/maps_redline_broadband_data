@@ -1,0 +1,83 @@
+Project name: Server
+Team member(s): Alejandro Jackson (ajacks41) and Ethan Cooperman (ecooperm)
+Total Time Worked: ~20 hours
+GitHub: https://github.com/cs0320-f23/server-alejack312-ethan-cooperman
+
+### 1. Functionality/Design
+Design choices -- high level design of your program
+Explain the relationships between classes/interfaces.
+Discuss any specific data structures you used, why you created it, and other high level explanations.
+Runtime/ space optimizations you made (if applicable).
+
+The CSVParser and Searcher were blends of our implementations. The CSVParser takes in two parameters
+and stores an unmodifiable list of lists of strings.
+
+The Searcher searches that list of lists of strings for a given search term. It returns a list of
+integers representing the indices of the rows that contain the search term.
+
+The Data class is responsible for sharing the state of data between the loadcsv, viewcsv, and
+searchcsv handlers.
+
+The CacheData class is responsible for maintaining the caching of state codes, county codes, and
+broadband data through broadband handler calls.
+
+The LoadCSVHandler is responsible for loading csvs into the Data class. It also handles the
+error handling for the loadcsv handler.
+
+The ViewCSVHandler is responsible for viewing the csvs in the Data class. It also handles the
+error handling for the viewcsv handler.
+
+The SearchCSVHandler is responsible for searching the csvs in the Data class. It also handles the
+error handling for the searchcsv handler.
+
+The loadcsv handler takes in parameters for a filepath and whether the csv has headers or not. The
+viewcsv handler takes in no parameters. The searchcsv handler takes in 1 parameter, the search
+term, if no column identification is provided. If column identification is provided, the searchcsv
+handler takes in two parameters. The broadband handler takes in three paramemeters, the name of
+the state, the name of the county, and whether the user would like their results to be cached or
+not.
+
+The Broadband Handler searches the ACS API for the variable S2802_C03_001E. This variable represents:
+With a computer!!Percent Broadband Internet Subscription!!Estimate!!Total population in households
+It seemed more representative of the population, so this is the variable we chose to return as
+opposed to S2802_C03_022E.
+
+The Broadband Handler also caches the state codes, county codes, and broadband data. This is
+because the ACS API receives a lot of calls. This means that if we did not cache the data,
+the user would have to wait longer for calls to the data.
+
+
+### 2. Errors/Bugs
+When running tests, the response_type sometimes returns as null.
+
+### 3. Testing
+TestParser and TestSearcher test the functionality of the parser and searcher with empty csvs,
+basic csvs, and csvs with and without headers.
+
+TestLoadCSVHandler tests the functionality of the LoadCSVHandler.
+
+TestViewCSVHandler tests the functionality of the ViewCSVHandler.
+
+TestSearchCSVHandler tests the functionality of the SearchCSVHandler.
+
+TestBroadbandHandlerReal tests the functionality of the BroadbandHandler with the actual ACS API,
+its error handling, and with and without caching.
+
+TestBroadbandHandler tests the functionality of the BroadbandHandler with mock data,
+its error handling, and with and without caching.
+
+TestData tests the functionality of the data class. This class is responsible for sharing the state
+of data between the loadcsv, viewcsv, and searchcsv handlers. It tests that the parser is correctly
+breaking down the data and sharing it between handlers regardless of whether the data has headers
+or not.
+
+
+### 4. Build and Run
+Upon running the main method, the user can choose whether they would like to use the Server
+functionality or the Searcher functionality. If the user chooses Server, they will be prompted to
+click a link where they can use the loadcsv, viewcsv, searchcsv, and broadband handlers.
+If the user chooses Searcher, they will be prompted to search a term using the dirctions displayed
+in the command line. The user can press exit to system exit when using the searcher and before
+entering the Server.
+
+
