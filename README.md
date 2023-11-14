@@ -4,7 +4,6 @@
 
 - Project name: Maps
 - Total estimated time: 20 hours
-- Repo link: https://github.com/cs0320-f23/maps-jyoo45-reng1
 
 ## Design Choices:
 
